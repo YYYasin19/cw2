@@ -5,6 +5,8 @@ TIME = "time"
 
 CPU_MEM = "mem-per-cpu"
 VENV = "venv"
+MAIL_TYPE = "mail-type"
+MAIL_USER = "mail-user"
 
 SBATCH_ARGS = "sbatch_args"
 SH_LINES = "sh_lines"

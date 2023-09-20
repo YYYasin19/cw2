@@ -14,6 +14,10 @@
 #SBATCH -c %%cpus-per-task%%  # Number of cores per task
 #SBATCH -t %%time%%             # 1:00:00 Hours, minutes and seconds, or '#SBATCH -t 10' - only minutes
 
+# Mail Notification Settings
+#SBATCH --mail-type=%%mail-type%%  # Send email when the job starts
+#SBATCH --mail-user=%%mail-user%%  # Your email address
+
 %%sbatch_args%%
 # -------------------------------
 

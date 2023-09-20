@@ -27,7 +27,7 @@ class SlurmConfig:
 
     def _check_template(self):
         """check if an sbatch.sh template is present.
-        If no costum template has been specified, the default will be used.
+        If no custom template has been specified, the default will be used.
         """
 
         if SKEYS.TEMPLATE_PATH not in self.slurm_conf:
@@ -55,6 +55,9 @@ class SlurmConfig:
         sc.setdefault(SKEYS.SLURM_LOG, os.path.join(exp_output_path, "slurmlog"))
         sc.setdefault(SKEYS.SLURM_OUT, os.path.join(exp_output_path, "sbatch.sh"))
         sc.setdefault(SKEYS.ACCOUNT, "")
+
+        sc.setdefault(SKEYS.MAIL_TYPE, "NONE")
+        sc.setdefault(SKEYS.MAIL_USER, "")
 
         # COMPLEX CONVERSIONS
         if isinstance(sc[SKEYS.TIME], int):
@@ -415,6 +418,9 @@ def write_slurm_script(slurm_conf: SlurmConfig, dir_mgr: SlurmDirectoryManager) 
         tline = tline.replace("%%ntasks%%", "{:d}".format(sc["ntasks"]))
         tline = tline.replace("%%cpus-per-task%%", "{:d}".format(sc["cpus-per-task"]))
         tline = tline.replace("%%time%%", sc[SKEYS.TIME])
+
+        tline = tline.replace("%%mail-type%%", sc["mail-type"])
+        tline = tline.replace("%%mail-user%%", sc["mail-user"])
 
         tline = tline.replace("%%sh_lines%%", sc[SKEYS.SH_LINES])
 
